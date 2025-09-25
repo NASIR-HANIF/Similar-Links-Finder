@@ -1,0 +1,3 @@
+python wp_find_one_link_per_site_v2.py --sites "C:\Users\rehman\Downloads\Similar Links Finder\input.txt" --keyword "Roof repair" --out "C:\Users\rehman\Downloads\Similar Links Finder\results.csv" --mode loose --threshold 1.2 --require-external yes
+
+
