@@ -1,27 +1,9 @@
-import streamlit as st
-import subprocess
-import os
-import pandas as pd
-
-st.title("Similar Links Finder (Web UI)")
-
-# --- UI elements ---
-uploaded_file = st.file_uploader("Input file (websites list .txt)", type=["txt"])
-keyword = st.text_input("Keyword to search", value="Roof repair")
-mode = st.selectbox("Mode", ["loose", "strict"])
-threshold = st.number_input("Threshold", min_value=0.0, max_value=5.0, value=1.2, step=0.1)
-require_external = st.selectbox("Require External Links", ["yes", "no"])
-output_name = st.text_input("Output file name (.csv)", value="results.csv")
-
-# --- Button ---
 if st.button("Run Finder"):
     if uploaded_file is not None and keyword:
-        # Save uploaded file temporarily
         input_path = os.path.join("temp_input.txt")
         with open(input_path, "wb") as f:
             f.write(uploaded_file.read())
 
-        # Build the command
         cmd = [
             "python", "wp_find_one_link_per_site_v2.py",
             "--sites", input_path,
@@ -32,16 +14,16 @@ if st.button("Run Finder"):
             "--require-external", require_external
         ]
 
-        # Debug: show command
+        # ⬅️ یہ لائن subprocess سے پہلے:
         st.write("Running command:", " ".join(cmd))
 
         with st.spinner("Running script..."):
-            # run the script and capture output
+            # ⬅️ subprocess.run کو result= … میں بدلیں
             result = subprocess.run(cmd, capture_output=True, text=True)
 
-        # Show script output and errors
-       # st.text(result.stdout)
-       # st.text(result.stderr)
+        # ⬅️ اور subprocess کے فوراً بعد یہ دو لائنیں لگائیں:
+        st.text(result.stdout)
+        st.text(result.stderr)
 
         if os.path.exists(output_name):
             st.success(f"Finished! File saved as {output_name}")
@@ -55,3 +37,14 @@ if st.button("Run Finder"):
             st.error("Output file not found.")
     else:
         st.warning("Please upload a file and enter a keyword.")
+
+
+#  pip install streamlit pandas requests beautifulsoup4
+#      (یا جو بھی requirements.txt میں ہیں، وہ سب ایک ساتھ: pip install -r requirements.txt)  
+
+# https://similar-links-finder-u8q3ulu5ngmsdmilbyi2e2.streamlit.app/
+
+# streamlit run app.py
+
+# Local URL: http://localhost:8501
+# Network URL: http://192.168.1.10:8501
