@@ -9,7 +9,7 @@ st.title("Similar Links Finder (Web UI)")
 uploaded_file = st.file_uploader("Input file (websites list .txt)", type=["txt"])
 
 # Keyword input
-keyword = st.text_input("Keyword to search", value="Roof repair")
+keyword = st.text_input("Keyword to search", value="Find keyword")
 
 # Mode select
 mode = st.selectbox("Mode", ["loose", "strict"])
