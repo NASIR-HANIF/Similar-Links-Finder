@@ -42,7 +42,7 @@ if st.button("Run Finder"):
 #  pip install streamlit pandas requests beautifulsoup4
 #      (یا جو بھی requirements.txt میں ہیں، وہ سب ایک ساتھ: pip install -r requirements.txt)  
 
-# https://similar-links-finder-u8q3ulu5ngmsdmilbyi2e2.streamlit.app/
+# https://similar-links-finder-pvjsn5fappdrdeiynegyrdf.streamlit.app/
 
 # streamlit run app.py
 
